@@ -13,19 +13,19 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET a single driver
+// GET a single user
 router.get('/:id', async (req, res) => {
   try {
-    const driverData = await Driver.findByPk(req.params.id, {
-      include: [{ model: License }, { model: Car }],
+    const userData = await User.findByPk(req.params.id, {
+      include: [{ model: Review }, { model: Wine }],
     });
 
-    if (!driverData) {
-      res.status(404).json({ message: 'No driver found with that id!' });
+    if (!userData) {
+      res.status(404).json({ message: 'No user found with that id!' });
       return;
     }
 
-    res.status(200).json(driverData);
+    res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
   }
