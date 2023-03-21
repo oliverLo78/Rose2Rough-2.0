@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { Driver, License, Car } = require('../../models');
+const { User, Review, Wine } = require('../../models');
 
-// GET all drivers
+// GET all users
 router.get('/', async (req, res) => {
   try {
-    const driverData = await Driver.findAll({
-      include: [{ model: License }, { model: Car }],
+    const userData = await User.findAll({
+      include: [{ model: Review }, { model: Wine }],
     });
-    res.status(200).json(driverData);
+    res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
   }
