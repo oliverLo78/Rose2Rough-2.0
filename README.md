@@ -52,7 +52,7 @@ Demo: Show your stuff!
 
 Directions for Future Development
 
-Links to the deployed application and the GitHub repository. Use the [![Guide to Deploy with Heroku](https://coding-boot-camp.github.io/full-stack/heroku/deploy-with-heroku-and-mysql)] ![Guide to Deploy with Heroku](<a href="https://coding-boot-camp.github.io/full-stack/heroku/deploy-with-heroku-and-mysql" target="_blank">Guide to Deploy with Heroku</a>)and MySQL on The Full-Stack Blog if you need a reminder on how to deploy to Heroku.
+Links to the deployed application and the GitHub repository. Use the Guide to(<a href="https://coding-boot-camp.github.io/full-stack/heroku/deploy-with-heroku-and-mysql" target="_blank">Guide to Deploy with Heroku</a>)and MySQL on The Full-Stack Blog if you need a reminder on how to deploy to Heroku.
 
 # Grading Requirements
 This project is graded based on the following criteria:
