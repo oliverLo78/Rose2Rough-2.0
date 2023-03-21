@@ -20,13 +20,13 @@ const seedDatabase = async () => {
 
 
   for (const { id } of users) {
-    const newWine = await Wine.create({
+    const newReview = await Review.create({
       user_id: id,
     });
   }
 
   for (const wine of wineSeedData) {
-    const wineSeed = await Wine.create({
+    const newWine = await Wine.create({
       ...wine,
       // Attach a random user ID to each wine
       user_id: users[Math.floor(Math.random() * users.length)].id,
