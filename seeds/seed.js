@@ -2,7 +2,7 @@ const sequelize = require('../config/connection');
 const { User, Review, Wine } = require('../models');
 
 const userSeedData = require('./userSeedData.json');
-const reviewSeedData = require('./reviewSeedData.json');
+const wineSeedData = require('./wineSeedData.json');
 
 // when you say sync it will drop the tables and insert the data
 const seedDatabase = async () => {
@@ -13,7 +13,7 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  const reviews = await Review.bulkCreate(reviewSeedData, {
+  const wines = await Review.bulkCreate(wineSeedData, {
     individualHooks: true,
     returning: true,
   });
@@ -25,10 +25,10 @@ const seedDatabase = async () => {
     });
   }
 
-  for (const review of reviewSeedData) {
-    const newReview = await Review.create({
-      ...review,
-      // Attach a random user ID to each review
+  for (const wine of wineSeedData) {
+    const wineSeed = await Wine.create({
+      ...wine,
+      // Attach a random user ID to each wine
       user_id: users[Math.floor(Math.random() * users.length)].id,
     });
   }

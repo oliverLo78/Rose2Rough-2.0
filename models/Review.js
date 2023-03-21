@@ -14,67 +14,48 @@ Review.init(
     },
     designation: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     points: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: true,
     },
     price: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: true,
     },
     province: {
       type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: true,
     },
     region_1: {
       type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: true,
     },
     taster_name: {
       type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: true,
     },
-    title: {
-      type: DataTypes.STRING,
-    },
-    variety: {
-      type: DataTypes.STRING,
-    },
-    winery: {
-      type: DataTypes.STRING,
-    },
-    designation: {
-       type: DataTypes.STRING,
-       allowNull: true,
-     },
-     points: {
-       type: DataTypes.INTEGER,
-       allowNull: false,
-     },
-     price: {
-       type: DataTypes.INTEGER,
-       allowNull: false,
-     },
-     province: {
-       type: DataTypes.STRING,
-       allowNull: false,
-     },
-     region_1: {
-       type: DataTypes.STRING,
-       allowNull: true,
-     },
-     taster_name: {
-       type: DataTypes.STRING,
-       allowNull: false,
-     },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-     },
-     variety: {
-       type: DataTypes.STRING,
-       allowNull: false,
-     },
-     winery: {
-       type: DataTypes.STRING,
-       allowNull: false,
-     },
+      defaultValue: true,
+    },
+    variety: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: true,
+    },
+    winery: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: true,
+    },
     // Store a reference of the 'id' of the 'User' that owns this Review
     user_id: {
       type: DataTypes.INTEGER,
