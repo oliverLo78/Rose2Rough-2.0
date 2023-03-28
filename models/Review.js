@@ -14,47 +14,39 @@ Review.init(
     },
     designation: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     points: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: true,
     },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: true,
     },
     province: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: true,
     },
     region_1: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: true,
     },
     taster_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: true,
     },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: true,
     },
     variety: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: true,
     },
     winery: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: true,
     },
     // Store a reference of the 'id' of the 'User' that owns this Review
     user_id: {
@@ -70,7 +62,7 @@ Review.init(
     sequelize,
     timestamps: true,
     freezeTableName: false,
-    // underscored: true,
+    underscored: true,
     modelName: 'review',
   }
 );
