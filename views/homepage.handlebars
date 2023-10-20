@@ -38,22 +38,68 @@
         </li>
       </ol>
 
-  {{#each reviews as |review|}}
-  <div class="review col-md-5">
-    <p>
-      {{review.id}}.
-      {{review.title}}
-    </p>
+    {{#each reviews as |review|}}
+    <div class="review col-md-5">
+      <p>
+        {{review.id}}.
+        {{review.title}}
+      </p>
+    </div>
+    <div class="row-md-2">
+      <p>
+        Guest:
+        {{review.taster_name}}
+      </p>
+    </div>
+    {{/each}}
+    <!-- This is the form for adding a new dish -->
+    <div class="add-dish-container">
+      <h2>
+        Review the wine you have tasted in the form!
+      </h2>
+      <form class="new-review-form">
+        <label for="review_title">
+          Review Title:
+        </label>
+        <br />
+        <textarea id="review_title" name="review_title" rows="2" cols="30">
+        {{review_title}}
+      </textarea>
+        <br />
+        <label for="description">
+          Description:
+        </label>
+        <br />
+        <textarea id="description" name="description" rows="5" cols="30">
+        {{description}}
+      </textarea>
+        <br />
+        <label for="taster_name">
+          Taster Name:
+        </label>
+        <br />
+        <textarea id="taster_name" name="taster_name" rows="2" cols="30">
+        {{taster_name}}
+      </textarea>
+        <br />
+        <br />
+        {{#if is-twenty-one}}
+        <input type="checkbox" id="is-twenty-one" name="is-twenty-one" checked />
+        {{else}}
+        <input type="checkbox" id="is-twenty-one" name="is-twenty-one" />
+        {{/if}}
+        <label for="is_twenty_one">
+          Check box if your 21 yrs. or Older
+        </label>
+        <br />
+        <button type="submit" value="Submit">
+          Submit
+        </button>
+      </form>
+    </div>
   </div>
-  <div class="row-md-2">
-    <p>
-      Guest:
-      {{review.taster_name}}
-    </p>
-  </div>
-  {{/each}}
-  
-</div>
+
+  <script src="/js/add-review.js"></script>
 
   
 

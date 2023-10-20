@@ -1,10 +1,9 @@
 async function newFormHandler(event) {
   event.preventDefault();
 
-  const title = document.querySelector('#title').value;
+  const title = document.querySelector('#review_title').value;
   const description = document.querySelector('#description').value;
   const taster_name = document.querySelector('#taster_name').value;
-
   const is_twenty_one = document.querySelector('#is_twenty_one:checked') ? true : false;
 
   const response = await fetch(`/api/review`, {

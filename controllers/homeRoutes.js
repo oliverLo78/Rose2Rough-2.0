@@ -1,83 +1,57 @@
 const router = require("express").Router();
-const { Review, User } = require("../models");
-const withAuth = require('../utils/auth');
+const { Review } = require("../models/Review");
 
-// GET route for homepage
-router.get("/", async (req, res) => {
-  const randomReviews = [];
-  for (let i = 0; i < 5; i++) {
-    const review = await Review.random();
-    randomReviews.push(review);
-  }
-  console.log(randomReviews);
-  res.render("homepage", { ...randomReviews, logged_in: req.session.logged_in });
-});
-
-// middleware requiring authorization access to route
-router.get("/review", withAuth, async (req, res) => {
-  try {
-      const userData = await User.findByPk(req.session.user_id, {
-          attributes: { exclude: ["password"] },
-          include: [{ model: Review }],
-      });
-
-      const user = userData.get({ plain: true });
-      console.log(userData);
-
-      res.render("reviews", {
-          ...user,
-          logged_in: true,
-      });
-  } catch (err) {
-      res.status(500).json(err);
-  }
-});
-
-// GET a single review
-router.get("/review/:id", withAuth, async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ["password"] },
-      include: [{ model: Review }]
+// Route to get all reviews
+router.get('/', async (req, res) => {
+  const reviewData = await Review.findAll().catch((err) => {
+    res.json(err);
     });
-
-  const user = userData.get({ plain: true });
-  console.log(user);
-  let review;
-  user.reviews.forEach((element) => {
-    if (element.id == req.params.id) {
-      review = element;
-    }
+    const reviews = reviewData.map((review) => review.get({ plain: true }));
+    res.render('homepage', { reviews });
+    console.log(reviews);
   });
 
-    if (review) {
-      res.render("review", review);
-    } else {
-      res.status(404).json({
-        message: `A review with id: ${req.params.id} does not exist`,
-      });
+// Route to get one review
+router.get('/review/:id', async (req, res) => {
+  try{
+    const reviewData = await Review.findByPk(req.params.id);
+    if(!reviewData) {
+      res.status(404).json({ message: 'No review found with this id!' });
+      return;
     }
+    const review = reviewData.get({ plain: true });
+    res.render('review', review);
+  } catch (err) {
+    res.status(500).json(err);
+  };
+});
+
+
+// According to MVC, what is the role of this action method?
+// This action method is the Controller. It accepts input and sends data to the Model and the View.
+router.put('/:id', async (req, res) => {
+  // Where is this action method sending the data from the body of the fetch request? Why?
+  // It is sending the data to the Model so that one review can be updated with new data in the database.
+  try {
+    const review = await Review.update(
+      {
+        dish_name: req.body.review_title,
+        description: req.body.description,
+        guest_name: req.body.taster_name,
+        has_nuts: req.body.is_twenty_one,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    // If the database is updated successfully, what happens to the updated data below?
+    // The updated data (dish) is then sent back to handler that dispatched the fetch request.
+    res.status(200).json(review);
   } catch (err) {
     res.status(500).json(err);
   }
-}); 
-
-router.get("/login", (req, res) => {
-  if (req. session.logged_in) {
-    res.redirect('/reviews');
-    return;
-  }
- 
-  res.render('login');
-});
-
-router.get("/signup", (req, res) => {
-  if (req. session.logged_in) {
-    res.redirect('/reviews');
-    return;
-  }
- 
-  res.render('signup');
 });
 
 module.exports = router;
