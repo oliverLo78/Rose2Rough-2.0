@@ -1,6 +1,7 @@
 const router = require("express").Router();
 // Import the models
 const  Review  = require("../../models/Review");
+const withAuth = require("../../utils/auth");
 
 // route to create/add a review using async/await
 router.post('/', async (req, res) => {
@@ -17,7 +18,6 @@ router.post('/', async (req, res) => {
   }
   });
   
-
 
   // TODO: According to MVC, what is the role of this action method?
   // This action method is the Controller. It accepts input and sends data to the Model and the View.
@@ -47,8 +47,6 @@ router.post('/', async (req, res) => {
 
 
   module.exports = router;
-
-// const withAuth = require("../../utils/auth");
 
 // // Get a list of reviews for the user with id = :id
 // router.get("/:id", async (req, res) => {
