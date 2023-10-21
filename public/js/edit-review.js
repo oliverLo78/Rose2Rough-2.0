@@ -1,6 +1,6 @@
 async function editFormHandler(event) {
   event.preventDefault();
-  const title = document.querySelector('#review_title').value;
+  const review_title = document.querySelector('#review_title').value;
   const description = document.querySelector('#description').value;
   const taster_name = document.querySelector('#taster_name').value;
 

@@ -34,7 +34,7 @@ Review.init(
     },
     price: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     province: {
       type: DataTypes.STRING,

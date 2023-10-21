@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { Review } = require("../models/Review");
+const { Review, User } = require("../models");
+const withAuth = require('../utils/auth');
 
 // Route to get all reviews
 router.get('/', async (req, res) => {
@@ -49,6 +50,26 @@ router.put('/:id', async (req, res) => {
     // If the database is updated successfully, what happens to the updated data below?
     // The updated data (dish) is then sent back to handler that dispatched the fetch request.
     res.status(200).json(review);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Use withAuth middleware to prevent access to route
+router.get('/review', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Review }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('review', {
+      ...user,
+      logged_in: true
+    });
   } catch (err) {
     res.status(500).json(err);
   }
