@@ -65,7 +65,7 @@
     background-color: #ebebeb;
   }
   
-  .add-dish-container {
+  .add-review-container {
     display: flex;
     flex-wrap: wrap;
     width: 35%;
@@ -83,7 +83,7 @@
     background-color: var(--tertiary);
   }
   
-  .edit-dish-container {
+  .edit-review-container {
     display: flex;
     flex-wrap: wrap;
     width: 35%;
