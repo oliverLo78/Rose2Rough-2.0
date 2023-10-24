@@ -5,7 +5,7 @@
     </h2>
   </div>
     <div>
-      <ol>
+      {{!-- <ol>
         <li>
           Castello di Neive 2016 Barbaresco; $40, 96 points.
         </li>
@@ -36,16 +36,16 @@
         <li>
           Nicosai 2019 Rosato Sosta Tre Santi Metodo Classico Brut(Etna); $35, 91 points.
         </li>
-      </ol>
+      </ol> --}}
 
     {{#each reviews as |review|}}
-    <div class="review col-md-5">
+    <div class="card-header col-md-5">
       <p>
         {{review.id}}.
-        {{review.review_title}}
+        {{review.title}}
       </p>
     </div>
-    <div class="row-md-2">
+    <div class="card-body row-md-2">
       <p>
         Guest:
         {{review.taster_name}}

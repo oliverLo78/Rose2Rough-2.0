@@ -102,7 +102,7 @@
   }
   
   /* CARDS */
-  .dish-card {
+  .menu-card {
     margin: 20px;
     flex: 0 1 300px;
     padding: 5px;
@@ -117,7 +117,7 @@
     color: var(--dark);
   }
   
-  .menu-card {
+  .review-card {
     margin: 50px;
     flex: 0 1 300px;
     padding: 5px;
@@ -140,11 +140,11 @@
     border-width: medium;
   }
 
-  .has-nuts {
+  .is_twenty_one {
     color: var(--error)
   }
 
-  .dish-card-header {
+  .review-card-header {
     font-size: 1.5rem;
     color: var(--tertiary);
     margin: 0;
