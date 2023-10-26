@@ -37,7 +37,7 @@
           Nicosai 2019 Rosato Sosta Tre Santi Metodo Classico Brut(Etna); $35, 91 points.
         </li>
       </ol> 
-
+    
     {{#each reviews as |review|}}
     <div class="card-header col-md-5">
       <p>
@@ -54,7 +54,7 @@
     <div class="is_twenty_one col-md-3">
      🔞: {{#if review.is_twenty_one}} 21 and older {{else}} No One Under Eighteen {{/if}}
     </div>
-    {{/each}}
+    {{/each}}  
     <!-- This is the form for adding a new dish -->
     <div class="add-review-container">
       <h2>
@@ -99,9 +99,7 @@
           Submit
         </button>
       </form>
-    </div>
-  </div>
-
+      
   <script src="/js/add-review.js"></script>
 
   

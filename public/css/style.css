@@ -66,11 +66,11 @@
   }
   
   .add-review-container {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
-    width: 35%;
-    min-height: 100%;
-    min-width: 35%;
+    width: 85%;
+    min-height: 50%;
+    min-width: 85%;
     margin: 5px auto;
     border: 3px solid var(--primary);
     border-radius: var(--border-radius);

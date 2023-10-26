@@ -36,7 +36,7 @@ router.put('/:id', async (req, res) => {
   try {
     const review = await Review.update(
       {
-        dish_name: req.body.review_title,
+        review_title: req.body.review_title,
         description: req.body.description,
         guest_name: req.body.taster_name,
         has_nuts: req.body.is_twenty_one,
