@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Location model
+// create our wine model
 class Wine extends Model {}
 
 // create fields/columns for Location model
