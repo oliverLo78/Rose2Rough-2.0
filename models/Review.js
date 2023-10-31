@@ -3,17 +3,17 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Review extends Model {
-    // Define a static method to retrieve a random review record
-    // static async random() {
-    //   try {
-    //     const count = await this.count(); // Get the total number of records in the table
-    //     const randomOffset = Math.floor(Math.random() * count); // Generate a random offset
-    //     const randomReview = await this.findOne({ offset: randomOffset }); // Retrieve a random record
-    //     return randomReview;
-    //   } catch (error) {
-    //     throw error;
-    //   }
-    // }
+    //Define a static method to retrieve a random review record
+    static async random() {
+      try {
+        const count = await this.count(); // Get the total number of records in the table
+        const randomOffset = Math.floor(Math.random() * count); // Generate a random offset
+        const randomReview = await this.findOne({ offset: randomOffset }); // Retrieve a random record
+        return randomReview;
+      } catch (error) {
+        throw error;
+      }
+    }
 }
 
 Review.init(

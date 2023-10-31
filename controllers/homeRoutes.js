@@ -2,15 +2,26 @@ const router = require("express").Router();
 const { Review, User } = require("../models");
 const withAuth = require('../utils/auth');
 
-// Route to get all reviews
+// Route to get all reviews for homepage
 router.get('/', async (req, res) => {
+  try {
   const reviewData = await Review.findAll().catch((err) => {
     res.json(err);
     });
     const reviews = reviewData.map((review) => review.get({ plain: true }));
     res.render('homepage', { reviews });
     console.log(reviews);
-  });
+
+    // Send over the 'loggedIn' session variable to the 'homepage' template
+    res.render('homepage', {
+      reviews, 
+      loggedIn: req.session.loggedIn
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // Route to get one review
 router.get('/review/:id', async (req, res) => {
@@ -21,11 +32,16 @@ router.get('/review/:id', async (req, res) => {
       return;
     }
     const review = reviewData.get({ plain: true });
-    res.render('review', review);
-  } catch (err) {
-    res.status(500).json(err);
-  };
-});
+        // Send over the 'loggedIn' session variable to the 'gallery' template
+        res.render('review', { 
+          review,
+          loggedIn: req.session.loggedIn 
+        });
+      } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+      }
+    });
 
 
 // According to MVC, what is the role of this action method?
@@ -73,6 +89,17 @@ router.get('/review', withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+// Login route
+router.get('/login', (req, res) => {
+  // If the user is already logged in, redirect to the homepage
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  // Otherwise, render the 'login' template
+  res.render('login');
 });
 
 module.exports = router;

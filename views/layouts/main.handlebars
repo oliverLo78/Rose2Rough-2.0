@@ -12,12 +12,28 @@
        &#127863 Rose 2 Rough! &#127863
       </h1>
     </header>
-      <main class="container container-fluid mt-5">
-
+    <nav>
+    <a href="/">Home</a>
+      <!-- If the user is logged in, show a logout button -->
+      {{#if loggedIn}}
+      <button id="logout" class="btn-no-style">Logout</button>
+      {{else}}
+      <!-- Otherwise, show a link to login -->
+      <a href="/login">Login</a>
+      {{/if}}
+    </nav>
+    <main class="container container-fluid mt-5">
+      <aside>
+        <h2>Enjoy the Wine Reviews!</h2>
+      </aside>
+      <div class="review">
         {{{ body }}}
-        
-      </main>
-  </div>
+      </div>
+    </main>
+    <!-- If the user is logged in, load the JS script for when they logout -->
+    {{#if loggedIn}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
   </body>
 
 </html>
