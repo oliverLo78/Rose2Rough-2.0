@@ -9,9 +9,7 @@ router.get('/', async (req, res) => {
     res.json(err);
     });
     const reviews = reviewData.map((review) => review.get({ plain: true }));
-    res.render('homepage', { reviews });
-    console.log(reviews);
-
+ 
     // Send over the 'loggedIn' session variable to the 'homepage' template
     res.render('homepage', {
       reviews, 
