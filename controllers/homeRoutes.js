@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
   const reviewData = await Review.findAll().catch((err) => {
     res.json(err);
     });
+
     const reviews = reviewData.map((review) => review.get({ plain: true }));
  
     // Send over the 'loggedIn' session variable to the 'homepage' template
@@ -31,14 +32,10 @@ router.get('/review/:id', async (req, res) => {
     }
     const review = reviewData.get({ plain: true });
         // Send over the 'loggedIn' session variable to the 'gallery' template
-        res.render('review', { 
-          review,
-          loggedIn: req.session.loggedIn 
-        });
+        res.render('review',  review );
       } catch (err) {
-        console.log(err);
         res.status(500).json(err);
-      }
+      };
     });
 
 

@@ -46,7 +46,7 @@ db.query('SELECT * FROM students', function (err, results) {
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 300000,
+    maxAge: 24 * 60 * 60 * 1000,  // expires in 24 hours
     httpOnly: true,
     secure: false,
     sameSite: 'strict',

@@ -10,10 +10,11 @@ router.post('/', async (req, res) => {
       password: req.body.password,
     });
 
-    // TODO: Set up sessions with the 'loggedIn' variable
+    // Set up sessions with the 'loggedIn' variable
     req.session.save(() => {
-      // TODO: Set the 'loggedIn' session variable to 'true'
+      // Set the 'loggedIn' session variable to 'true'
       req.session.loggedIn = true;
+
       res.status(200).json(dbUserData);
     });
   } catch (err) {
@@ -48,8 +49,9 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
-      // TODO: Once the user successfully logs in, set up sessions with the 'loggedIn' variable
-      req.session.loggedIn = true
+      // Once the user successfully logs in, set up sessions with the 'loggedIn' variable
+      req.session.loggedIn = true;
+      
       res
         .status(200)
         .json({ user: dbUserData, message: 'You are now logged in!' });
