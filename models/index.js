@@ -1,5 +1,6 @@
 const User = require('./User');
 const Review = require('./Review');
+const Wine = require('./Wine');
 
 // Define a User as having many Reviews, thus creating a foreign key in the 
 // 'review' table

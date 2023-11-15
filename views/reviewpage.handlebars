@@ -1,0 +1,34 @@
+
+    
+    {{#each reviews as |review|}}
+    <div class="card-header col-md-5">
+      <p>
+        {{review.id}}.
+        {{review.title}}
+      </p>
+    </div>
+    <div class="card-body row-md-2">
+      <p>
+        Guest:
+        {{review.taster_name}}
+      </p>
+    </div>
+    <div class="is_twenty_one col-md-3">
+     🔞: {{#if review.is_twenty_one}} 21 and older {{else}} No One Under Eighteen {{/if}}
+    </div>
+    {{/each}}  
+    
+<section class="review-card">
+  <a href="/review/{{id}}">
+    <header>Title: {{title}}</header>
+    <p>Description: {{description}}</p>
+    <p>Guest: {{taster_name}} </p>
+    <img src="/images/{{paintings.[0].filename}}" alt="{{paintings.[0].description}}">
+  </a>
+</section>
+
+
+  
+
+
+

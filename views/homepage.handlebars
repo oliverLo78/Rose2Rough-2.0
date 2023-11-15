@@ -1,7 +1,7 @@
 <div class="menu-container">
   <div class="card-header col-md-10">
     <h2>
-      &#127863 Current Wines 
+      &#127863 Current Wine Reviews
     </h2>
   </div>
     <div>
@@ -37,73 +37,8 @@
           Nicosai 2019 Rosato Sosta Tre Santi Metodo Classico Brut(Etna); $35, 91 points.
         </li>
       </ol> 
-    
-    {{#each reviews as |review|}}
-    <div class="card-header col-md-5">
-      <p>
-        {{review.id}}.
-        {{review.title}}
-      </p>
-    </div>
-    <div class="card-body row-md-2">
-      <p>
-        Guest:
-        {{review.taster_name}}
-      </p>
-    </div>
-    <div class="is_twenty_one col-md-3">
-     🔞: {{#if review.is_twenty_one}} 21 and older {{else}} No One Under Eighteen {{/if}}
-    </div>
-    {{/each}}  
-    
-    <!-- This is the form for adding a new dish -->
-    <div class="add-review-container">
-      <h2>
-        Review the wine you have tasted in the form!
-      </h2>
-      <form class="new-review-form">
-        <label for="review_title">
-          Review Title:
-        </label>
-        <br />
-        <textarea id="review_title" name="review_title" rows="2" cols="30">
-        {{review_title}}
-      </textarea>
-        <br />
-        <label for="description">
-          Description:
-        </label>
-        <br />
-        <textarea id="description" name="description" rows="5" cols="30">
-        {{description}}
-      </textarea>
-        <br />
-        <label for="taster_name">
-          Taster Name:
-        </label>
-        <br />
-        <textarea id="taster_name" name="taster_name" rows="2" cols="30">
-        {{taster_name}}
-      </textarea>
-        <br />
-        <br />
-        {{#if is-twenty-one}}
-        <input type="checkbox" id="is-twenty-one" name="is-twenty-one" checked />
-        {{else}}
-        <input type="checkbox" id="is-twenty-one" name="is-twenty-one" />
-        {{/if}}
-        <label for="is_twenty_one">
-          Check box if your 21 yrs. or Older
-        </label>
-        <br />
-        <button type="submit" value="Submit">
-          Submit
-        </button>
-      </form>
-      
-  <script src="/js/add-review.js"></script>
 
-  
-
-
-
+<!-- For each gallery, the review-details partial is used to render the  data -->
+{{#each cellars as |cellar|}}
+{{> cellar-details}}
+{{/each}}

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Review, User } = require("../models");
+const { Review, Wine, User} = require("../models");
 const withAuth = require('../utils/auth');
 
 // Route to get all reviews for homepage
@@ -24,20 +24,19 @@ router.get('/', async (req, res) => {
 
 // Route to get one review
 router.get('/review/:id', async (req, res) => {
-  try{
+  try {
+    // Search the database for a dish with an id that matches params
     const reviewData = await Review.findByPk(req.params.id);
-    if(!reviewData) {
-      res.status(404).json({ message: 'No review found with this id!' });
-      return;
-    }
+    console.log(reviewData)
+    // We use .get({ plain: true }) on the object to serialize it so that it only includes the data that we need. 
     const review = reviewData.get({ plain: true });
-        // Send over the 'loggedIn' session variable to the 'gallery' template
-        res.render('review',  review );
-      } catch (err) {
+    // Then, the 'dish' template is rendered and dish is passed into the template.
+    res.render('reviewpage', review);
+    } catch (err) {
         res.status(500).json(err);
-      };
-    });
-
+    }
+  });
+  
 
 // According to MVC, what is the role of this action method?
 // This action method is the Controller. It accepts input and sends data to the Model and the View.
@@ -47,7 +46,7 @@ router.put('/:id', async (req, res) => {
   try {
     const review = await Review.update(
       {
-        review_title: req.body.review_title,
+        review_title: req.body.title,
         description: req.body.description,
         guest_name: req.body.taster_name,
         has_nuts: req.body.is_twenty_one,
@@ -67,24 +66,24 @@ router.put('/:id', async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
-router.get('/review', withAuth, async (req, res) => {
-  try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Review }],
-    });
+// router.get('/review', withAuth, async (req, res) => {
+//   try {
+//     // Find the logged in user based on the session ID
+//     const userData = await User.findByPk(req.session.user_id, {
+//       attributes: { exclude: ['password'] },
+//       include: [{ model: Review }],
+//     });
 
-    const user = userData.get({ plain: true });
+//     const user = userData.get({ plain: true });
 
-    res.render('review', {
-      ...user,
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.render('reviewpage', {
+//       ...user,
+//       logged_in: true
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // Login route
 router.get('/login', (req, res) => {

@@ -11,27 +11,32 @@ Wine.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     wine_name: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'user',
-        key: 'id',
-      }
-    }
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    taster_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    is_twenty_one: {
+      type: DataTypes.BOOLEAN,
+    },
   },
   {
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'wine'
+    modelName: 'wine',
   }
 );
 
 module.exports = Wine;
+
+  

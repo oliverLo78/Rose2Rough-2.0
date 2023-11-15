@@ -1,5 +1,6 @@
 const sequelize = require('../config/connection');
-const { User, Review } = require('../models');
+const { User, Review, Wine } = require('../models');
+const seedWines = require('./wineSeedData');
 
 const userSeedData = require('./userSeedData.json');
 const reviewSeedData = require('./reviewSeedData.json');
@@ -17,7 +18,6 @@ const seedDatabase = async () => {
     individualHooks: true,
     returning: true,
   });
-
 
   for (const { id } of users) {
     const newReview = await Review.create({
