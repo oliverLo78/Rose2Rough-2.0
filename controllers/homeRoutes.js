@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Review, Wine, User} = require("../models");
+const { Review, Cellar, User} = require("../models");
 const withAuth = require('../utils/auth');
 
 // Route to get all reviews for homepage
@@ -37,6 +37,34 @@ router.get('/review/:id', async (req, res) => {
     }
   });
   
+// Get all Cellars for homepage
+router.get('/', async (req, res) => {
+  try {
+    const dbCellarData = await Cellar.findAll({
+      include: [
+        {
+          model: Review,
+          attributes: ['title', 'description'],
+        },
+      ],
+    });
+
+    const cellars = dbCellarData.map((cellar) =>
+      cellar.get({ plain: true })
+    );
+
+    res.render('homepage', {
+      cellars,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
+
 
 // According to MVC, what is the role of this action method?
 // This action method is the Controller. It accepts input and sends data to the Model and the View.

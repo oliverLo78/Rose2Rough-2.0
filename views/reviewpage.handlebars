@@ -1,6 +1,4 @@
-
-    
-    {{#each reviews as |review|}}
+{{#each reviews as |review|}}
     <div class="card-header col-md-5">
       <p>
         {{review.id}}.
@@ -16,14 +14,14 @@
     <div class="is_twenty_one col-md-3">
      🔞: {{#if review.is_twenty_one}} 21 and older {{else}} No One Under Eighteen {{/if}}
     </div>
-    {{/each}}  
+{{/each}}  
     
 <section class="review-card">
   <a href="/review/{{id}}">
     <header>Title: {{title}}</header>
     <p>Description: {{description}}</p>
     <p>Guest: {{taster_name}} </p>
-    <img src="/images/{{paintings.[0].filename}}" alt="{{paintings.[0].description}}">
+    <img src="/images/{{reviews.[0].filename}}" alt="{{reviews.[0].description}}">
   </a>
 </section>
 

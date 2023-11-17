@@ -1,6 +1,6 @@
-const { Wine } = require('../models');
+const { Cellar } = require('../models');
 
-const winedata = [
+const cellardata = [
             {
                 country: "US",
                 description: "This tremendous 100% varietal wine hails from Oakville and was aged over three years in oak. Juicy red-cherry fruit and a compelling hint of caramel greet the palate, framed by elegant, fine tannins and a subtle minty tone in the background. Balanced and rewarding from start to finish, it has years ahead of it to develop further nuance. Enjoy 2022–2030.",
@@ -68,6 +68,6 @@ const winedata = [
             },
 ];
 
-const seedWines = () => Wine.bulkCreate(winedata);
+const seedCellars = () => Cellar.bulkCreate(cellardata);
 
-module.exports = seedWines;
+module.exports = seedCellars;

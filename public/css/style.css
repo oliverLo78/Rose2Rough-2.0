@@ -49,6 +49,12 @@
     background-color: var(--secondary);
   }
   
+  a {
+    color: #1b89bc;
+    text-decoration: none;
+    padding: 10px;
+  }
+
   .menu-container {
     display: flex;
     flex-wrap: wrap;

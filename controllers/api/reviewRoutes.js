@@ -1,7 +1,94 @@
 const router = require("express").Router();
 // Import the models
-const  Review  = require("../../models/Review");
+const  { Review, Cellar }  = require("../../models/Review");
 const withAuth = require("../../utils/auth");
+
+// Get all Cellars for homepage
+router.get('/', async (req, res) => {
+  try {
+    const dbCellarData = await Cellar.findAll({
+      include: [
+        {
+          model: Review,
+          attributes: ['title', 'description'],
+        },
+      ],
+    });
+
+    const cellars = dbCellarData.map((cellar) =>
+      cellar.get({ plain: true })
+    );
+
+    req.session.save(() => {
+      // We set up a session variable to count the number of times we visit the homepage
+      if (req.session.countVisit) {
+        // If the 'countVisit' session variable already exists, increment it by 1
+        req.session.countVisit++;
+      } else {
+        // If the 'countVisit' session variable doesn't exist, set it to 1
+        req.session.countVisit = 1;
+      }
+
+      res.render('homepage', {
+        cellar,
+        loggedIn: req.session.loggedIn,
+        countVisit: req.session.countVisit,
+      });
+    });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
+// GET one cellar
+// Use the custom middleware before allowing the user to access the gallery
+router.get('/cellar/:id', withAuth, async (req, res) => {
+  try {
+    const dbCellarData = await Cellar.findByPk(req.params.id, {
+      include: [
+        {
+          model: Review,
+          attributes: [
+            'id',
+            'title',
+            'description',
+            'taster_name',
+          ],
+        },
+      ],
+    });
+
+    const cellar = dbCellarData.get({ plain: true });
+    res.render('cellar', { 
+      reviewpage, 
+      loggedIn: req.session.loggedIn,
+      countVisit: req.session.countVisit,
+     });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET one review
+// Use the custom middleware before allowing the user to access the review
+router.get('/review/:id', withAuth, async (req, res) => {
+  try {
+    const dbReviewData = await Review.findByPk(req.params.id);
+
+    const review = dbReviewData.get({ plain: true });
+
+    res.render('review', { 
+      review, 
+      loggedIn: req.session.loggedIn,
+      countVisit: req.session.countVisit,
+     });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // route to create/add a review using async/await
 router.post('/', async (req, res) => {
@@ -67,19 +154,8 @@ router.delete("/", withAuth, async (req, res) => {
     }
 });
 
+module.exports = router;
 
-  module.exports = router;
 
-// // CREATE mulitple reviews
-// router.post('/seed', (req, res) => {
-//     Review.bulkCreate([
-//      
-//     ]).then(function () {
-//         res.send('Database seeded!');
-//     }).catch(function (err) {
-//         console.log(err);
-//         res.json(err);
-//     });
-// });
 
 

@@ -37,8 +37,12 @@
           Nicosai 2019 Rosato Sosta Tre Santi Metodo Classico Brut(Etna); $35, 91 points.
         </li>
       </ol> 
+<!-- We are tracking the number of times we visit the homepage -->
+<h3>Number of times you've visited the homepage: {{countVisit}}</h3>
 
-<!-- For each gallery, the review-details partial is used to render the  data -->
+<section class="galleries">
+  <!-- For each gallery, the review-details partial is used to render the  data -->
 {{#each cellars as |cellar|}}
 {{> cellar-details}}
 {{/each}}
+</section>

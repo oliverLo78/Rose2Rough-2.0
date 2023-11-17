@@ -68,17 +68,6 @@ Review.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // // Add created_at and updated_at columns
-    // created_at: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false,
-    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'), // Set a default value
-    // },
-    // updated_at: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false,
-    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'), // Set a default value
-    // },
    //Store a reference of the 'id' of the 'User' that owns this Review
     user_id: {
       type: DataTypes.INTEGER,

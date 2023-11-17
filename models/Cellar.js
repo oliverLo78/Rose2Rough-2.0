@@ -2,10 +2,10 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // create our wine model
-class Wine extends Model {}
+class Cellar extends Model {}
 
 // create fields/columns for Location model
-Wine.init(
+Cellar.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -33,10 +33,10 @@ Wine.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'wine',
+    modelName: 'cellar',
   }
 );
 
-module.exports = Wine;
+module.exports = Cellar;
 
   
