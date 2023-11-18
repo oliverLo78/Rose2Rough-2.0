@@ -53,8 +53,8 @@ router.get('/', async (req, res) => {
       cellar.get({ plain: true })
     );
 
-    res.render('homepage', {
-      cellars,
+    res.render('cellar', {
+      reviews,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -62,7 +62,6 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 
 

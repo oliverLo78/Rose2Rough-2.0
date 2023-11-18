@@ -8,7 +8,7 @@ const reviewLink = document.getElementsByClassName('review-link');
 async function createReviewHandler() {
   let answer = document.getElementById('createReviewName').value;
 
-  const results = await fetch('api/review', {
+  const results = await fetch('/homeRoutes', {
     method: 'POST',
     body: JSON.stringify({ deck_name: answer }),
     headers: { 'Content-Type': 'application/json' },

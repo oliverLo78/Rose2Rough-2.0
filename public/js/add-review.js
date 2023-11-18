@@ -6,7 +6,7 @@ async function newFormHandler(event) {
   const taster_name = document.querySelector('#taster_name').value;
   const is_twenty_one = document.querySelector('#is_twenty_one:checked') ? true : false;
 
-  const response = await fetch(`/api/review`, {
+  const response = await fetch(`/homeRoutes`, {
     method: 'POST',
     body: JSON.stringify({
       review_title,
