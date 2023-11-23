@@ -48,6 +48,18 @@
     display: flex;
     background-color: var(--secondary);
   }
+
+  nav a {
+    color: var(--light);
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+  }
+  
+  nav a:hover {
+    color: var(--secondary);
+    background-color: var(--dark);
+  }
   
   a {
     color: #1b89bc;
@@ -55,6 +67,50 @@
     padding: 10px;
   }
 
+  
+  a:visited {
+    color: inherit;
+  }
+
+  .cellar {
+    flex: 4;
+    background-color: #fff;
+    padding: 50px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn-no-style {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 100%;
+    transition: color 0.1s;
+    margin-left: 16px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .painting {
+    width: 70%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+  }
+  
+  .painting-details {
+    text-align: center;
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+  
   .menu-container {
     display: flex;
     flex-wrap: wrap;
@@ -165,6 +221,19 @@
     text-align: center;
   }
   
+  .login-card {
+    margin: 0 0 20px 0;
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 5px;
+    border: 3px solid var(--dark);
+    border-radius: var(--border-radius);
+    border-style: double;
+    border-width: thick;
+    background-color: #577a7c;
+    color: var(--light);
+  }
+
   /* LAYOUT */
   .container {
     display: flex;
@@ -173,6 +242,12 @@
     align-items: center;
   }
   
+  .cellars {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
   @media (max-width: 768px) { 
     #reviewing {
         margin-top: 210vh;

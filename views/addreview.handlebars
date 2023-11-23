@@ -1,27 +1,32 @@
-<div class="review-card">
-  <div class="review-card-header">
-    {{title}}
+<div class="menu-container">
+  <div class="card-header col-md-12 text-center">
+    <h2>
+      &#127863 Current Reviews
+    </h2>
+  </div>
+  {{#each reviews as |review|}}
+  <div class="review-card-header col-md-4">
+    <p>
+      {{review.id}}.
+      {{review.review_title}}
+    </p>
   </div>
   <div class="card-body">
     <p>
       Description:
       {{description}}
     </p>
+  </div>
+  <div class="col-md-5">
     <p>
       Guest:
-      {{taster_name}}
+      {{review.taster_name}}
     </p>
-    <!-- This is where we initiate the #if helper with is-twenty-one set as the condition -->
-    {{#if is_twenty_one}}
-    <!-- This code will be rendered if the condition (is-twenty-one) is truthy -->
-      <p class="is-twenty-one">
-        You are 21 yrs. please submit your review
-      </p>
-    <!-- Below, we end the #if helper -->
-    {{/if}}
   </div>
-</div>
-
+  <div class="col-md-3">
+    🔞: {{#if review.is_twenty_one}} is Twenty One  {{else}} Not twenty one {{/if}}
+  </div>
+  {{/each}}
 
  <!-- This is the form for adding a new dish -->
     <div class="add-review-container">
