@@ -38,79 +38,11 @@ router.get('/review/:id', async (req, res) => {
   });
   
 // Get all Cellars for homepage
-router.get('/', async (req, res) => {
-  try {
-    const dbCellarData = await Cellar.findAll({
-      include: [
-        {
-          model: Review,
-          attributes: ['title', 'description'],
-        },
-      ],
-    });f
-
-    const cellars = dbCellarData.map((cellar) =>
-      cellar.get({ plain: true })
-    );
-
-    res.render('cellar', {
-      cellars,
-      loggedIn: req.session.loggedIn,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-router.post('/', async (req, res) => {
-  try {
-    const reviewData = await Review.create({
-      review_title: req.body.review_title,
-      description: req.body.description,
-      guest_name: req.body.taster_name,
-      is_twenty_one: req.body.is_twenty_one,
-    });
-
-    // Set up sessions with the 'loggedIn' variable
-    req.session.save(() => {
-      // Set the 'loggedIn' session variable to 'true'
-      req.session.loggedIn = true;
-
-      res.status(200).json(reviewData);
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
 
 // According to MVC, what is the role of this action method?
 // This action method is the Controller. It accepts input and sends data to the Model and the View.
-router.put('/:id', async (req, res) => {
   // Where is this action method sending the data from the body of the fetch request? Why?
   // It is sending the data to the Model so that one review can be updated with new data in the database.
-  try {
-    const reviewData = await Review.update(
-      {
-        review_title: req.body.review_title,
-        description: req.body.description,
-        guest_name: req.body.taster_name,
-        has_nuts: req.body.is_twenty_one,
-      },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    // If the database is updated successfully, what happens to the updated data below?
-    // The updated data (dish) is then sent back to handler that dispatched the fetch request.
-    res.status(200).json(reviewData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 // Login route
 router.get('/login', (req, res) => {
