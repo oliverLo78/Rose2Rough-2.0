@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
         },
       });
       // TODO: If the database is updated successfully, what happens to the updated data below?
-      // The updated data (dish) is then sent back to handler that dispatched the fetch request.
+      // The updated data (review) is then sent back to handler that dispatched the fetch request.
       res.status(200).json(review);
     } catch (err) {
         res.status(500).json(err);
