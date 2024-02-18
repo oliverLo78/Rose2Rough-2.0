@@ -1,6 +1,6 @@
 async function editFormHandler(event) {
   event.preventDefault();
-  const review_title = document.querySelector('#review_title').value;
+  const title = document.querySelector('#title').value;
   const description = document.querySelector('#description').value;
   const taster_name = document.querySelector('#taster_name').value;
 
@@ -21,7 +21,7 @@ async function editFormHandler(event) {
   const response = await fetch(`/api/review/${id}`, {
     method: 'PUT',
     body: JSON.stringify({
-      review_title,
+      title,
       description,
       taster_name,
       is_twenty_one,

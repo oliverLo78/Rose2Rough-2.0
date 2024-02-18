@@ -1,25 +1,13 @@
 const router = require("express").Router();
-const { Review, Cellar, User} = require("../models");
-// const withAuth = require('../utils/auth');
+const Review = require("../models/Review");
 
-// Route to get all reviews for homepage
+// Get all reviews for homepage
 router.get('/', async (req, res) => {
-  try {
   const reviewData = await Review.findAll().catch((err) => {
     res.json(err);
-    });
-
-    const reviews = reviewData.map((review) => review.get({ plain: true }));
- 
-    // Send over the 'loggedIn' session variable to the 'homepage' template
-    res.render('homepage', {
-      reviews, 
-      loggedIn: req.session.loggedIn
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+  });
+  const reviews = reviewData.map((review) => review.get({ plain: true }));
+  res.render('homepage', { reviews });
 });
 
 // Route to get one review
@@ -31,13 +19,11 @@ router.get('/review/:id', async (req, res) => {
     // We use .get({ plain: true }) on the object to serialize it so that it only includes the data that we need. 
     const review = reviewData.get({ plain: true });
     // Then, the 'dish' template is rendered and dish is passed into the template.
-    res.render('addreview', review);
+    res.render('reviewpage', review);
     } catch (err) {
         res.status(500).json(err);
     }
   });
-  
-// Get all Cellars for homepage
 
 // According to MVC, what is the role of this action method?
 // This action method is the Controller. It accepts input and sends data to the Model and the View.

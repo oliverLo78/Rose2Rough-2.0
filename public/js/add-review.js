@@ -1,7 +1,7 @@
 async function newFormHandler(event) {
   event.preventDefault();
 
-  const review_title = document.querySelector('#review_title').value;
+  const title = document.querySelector('#title').value;
   const description = document.querySelector('#description').value;
   const taster_name = document.querySelector('#taster_name').value;
   
@@ -10,7 +10,7 @@ async function newFormHandler(event) {
   const response = await fetch(`/api/review`, {
     method: 'POST',
     body: JSON.stringify({
-      review_title,
+      title,
       description,
       taster_name,
       is_twenty_one,

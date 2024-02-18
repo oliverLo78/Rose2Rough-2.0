@@ -4,45 +4,64 @@
       &#127863 Current Wine Reviews
     </h2>
   </div>
-    <div>
-       <ol>
-        <li>
-          Castello di Neive 2016 Barbaresco; $40, 96 points.
-        </li>
-        <li>
-          Éric & Jöel Durand 2016 Empreintes (Cornas); $39, 96 points.
-        </li>
-        <li>
-          Selvapiana 2015 Vigneto Bucerchiale Riserva (Chianti Rufina); $36, 96 points.
-        </li>
-        <li>
-          Joh. Jos. Prüm 2017 Graacher Himmelreich Auslese Riesling (Mosel); $32, 95 points. 
-        </li>
-        <li>
-          Bec Hardy 2021 Semillon-Sauvignon Blanc (Adelaide); $28, 90 points.
-        </li>
-        <li>
-          Torricino 2020 Raone Riserva (Greco di Tufo); $25, 90 points.
-        </li>
-        <li>
-          Howard Park 2018 Miamup Cabernet Sauvignon (Margaret River); $23, 90 points.
-        </li>
-        <li>
-          Alexakis 2020 Assytriko(Crete); $19, 90 points
-        </li>
-        <li>
-          Heron Hill 2018 Reserve Marcri Vineyard Oaked Chardonnnay(Finger Lakes); $18, 90 points.
-        </li>
-        <li>
-          Nicosai 2019 Rosato Sosta Tre Santi Metodo Classico Brut(Etna); $35, 91 points.
-        </li>
-      </ol> 
-<!-- We are tracking the number of times we visit the homepage -->
-<h3>Number of times you've visited the homepage: {{countVisit}}</h3>
+  {{#each reviews as |review|}}
+    <div class='review col-md-5'>
+      <p>
+        {{review.id}}.
+        {{review.title}}
+      </p>
+    </div>
+    <div class='col-md-7'>
+      <p>
+        Guest:
+        {{review.taster_name}}
+      </p>
+    </div>
+  {{/each}}
 
-<section class="cellars">
-  <!-- For each gallery, the review-details partial is used to render the  data -->
-{{#each cellars as |cellar|}}
-{{> cellar-details}}
-{{/each}}
-</section>
+ <!-- This is the form for adding a new dish -->
+    <div class="add-review-container">
+      <h2>
+        Review the wine you have tasted in the form!
+      </h2>
+      <form class="new-review-form">
+        <label for="review_title">
+          Review Title:
+        </label>
+        <br />
+        <textarea id="title" name="title" rows="2" cols="30">
+        {{title}}
+      </textarea>
+        <br />
+        <label for="description">
+          Description:
+        </label>
+        <br />
+        <textarea id="description" name="description" rows="5" cols="30">
+        {{description}}
+      </textarea>
+        <br />
+        <label for="taster_name">
+          Taster Name:
+        </label>
+        <br />
+        <textarea id="taster_name" name="taster_name" rows="2" cols="30">
+        {{taster_name}}
+      </textarea>
+        <br />
+        <br />
+        {{#if is-twenty-one}}
+        <input type="checkbox" id="is-twenty-one" name="is-twenty-one" checked />
+        {{else}}
+        <input type="checkbox" id="is-twenty-one" name="is-twenty-one" />
+        {{/if}}
+        <label for="is_twenty_one">
+          Check box if your 21 yrs. or Older
+        </label>
+        <br />
+        <button type="submit" value="Submit">
+          Submit
+        </button>
+      </form>
+
+    <script src="/js/add-review.js"></script>

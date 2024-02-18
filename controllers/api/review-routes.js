@@ -1,16 +1,12 @@
 const router = require("express").Router();
 // Import the models
-const   Review   = require("../../models/Review");
-const  Cellar   = require("../../models/Cellar");
+const Review = require("../../models/Review");
 
-const withAuth = require("../../utils/auth");
-
-// // route to create/add a review using async/await
+// route to create/add a review using async/await
 router.post('/', async (req, res) => {
     try { 
-      const reviewData = await Review.create(
-      {
-      review_title: req.body.review_title,
+      const reviewData = await Review.create({
+      title: req.body.title,
       description: req.body.description,
       taster_name: req.body.taster_name,
       is_twenty_one: req.body.is_twenty_one,
@@ -22,15 +18,14 @@ router.post('/', async (req, res) => {
   }
   });
   
-//   // TODO: According to MVC, what is the role of this action method?
-//   // This action method is the Controller. It accepts input and sends data to the Model and the View.
+// TODO: According to MVC, what is the role of this action method?
+// This action method is the Controller. It accepts input and sends data to the Model and the View.
   router.put('/:id', async (req, res) => {
     // TODO: Where is this action method sending the data from the body of the fetch request? Why?
       // It is sending the data to the Model so that one review can be updated with new data in the database.
     try {
-      const review = await Review.update(
-      {
-        review_title: req.body.review_title,
+      const review = await Review.update({
+        title: req.body.title,
         description: req.body.description,
         taster_name: req.body.taster_name,
         is_twenty_one: req.body.is_twenty_one,
@@ -49,7 +44,7 @@ router.post('/', async (req, res) => {
   });
 
 // // Delete a review
-router.delete("/", withAuth, async (req, res) => {
+router.delete("/", async (req, res) => {
     try {
         const reviewData = await Review.destroy({
             where: {
@@ -74,92 +69,22 @@ module.exports = router;
 
 
 
-// // Get all Cellars for homepage
-// router.get('/', async (req, res) => {
-//   try {
-//     const dbCellarData = await Cellar.findAll({
-//       include: [
-//         {
-//           model: Review,
-//           attributes: ['title', 'description'],
-//         },
-//       ],
-//     });
 
-//     const cellars = dbCellarData.map((cellar) =>
-//       cellar.get({ plain: true })
-//     );
 
-//     req.session.save(() => {
-//       // We set up a session variable to count the number of times we visit the homepage
-//       if (req.session.countVisit) {
-//         // If the 'countVisit' session variable already exists, increment it by 1
-//         req.session.countVisit++;
-//       } else {
-//         // If the 'countVisit' session variable doesn't exist, set it to 1
-//         req.session.countVisit = 1;
-//       }
 
-//       res.render('homepage', {
-//         cellars,
-//         loggedIn: req.session.loggedIn,
-//         countVisit: req.session.countVisit,
-//       });
-//     });
-//     } catch (err) {
-//       console.log(err);
-//       res.status(500).json(err);
-//     }
-//   });
 
-// // GET one cellar
-// // Use the custom middleware before allowing the user to access the gallery
-// router.get('/cellar/:id', withAuth, async (req, res) => {
-//   try {
-//     const dbCellarData = await Cellar.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: Review,
-//           attributes: [
-//             'id',
-//             'title',
-//             'description',
-//             'taster_name',
-//           ],
-//         },
-//       ],
-//     });
 
-//     const cellar = dbCellarData.get({ plain: true });
-//     res.render('cellar', { 
-//       reviewpage, 
-//       loggedIn: req.session.loggedIn,
-//       countVisit: req.session.countVisit,
-//      });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
 
-// // GET one review
-// // Use the custom middleware before allowing the user to access the review
-// router.get('/review/:id', withAuth, async (req, res) => {
-//   try {
-//     const dbReviewData = await Review.findByPk(req.params.id);
 
-//     const review = dbReviewData.get({ plain: true });
 
-//     res.render('review', { 
-//       review, 
-//       loggedIn: req.session.loggedIn,
-//       countVisit: req.session.countVisit,
-//      });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
+
+
+
+
+
+
+
+
 
 
 
