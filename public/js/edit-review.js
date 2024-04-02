@@ -17,7 +17,6 @@ async function editFormHandler(event) {
 
   // What part of our application will handle this 'put' request?
   // The Controller will handle this 'put' request.
-
   const response = await fetch(`/api/review/${id}`, {
     method: 'PUT',
     body: JSON.stringify({
