@@ -5,7 +5,7 @@ const reviewData = require('./dish-seeds.json');
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
-  await Review.bulkCreate(dishData, {
+  await Review.bulkCreate(reviewData, {
     individualHooks: true,
     returning: true,
   });

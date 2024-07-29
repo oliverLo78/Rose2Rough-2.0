@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Login
+// POST user Login
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
@@ -73,5 +73,68 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+// Get a user
+router.get('/:id', async (req, res) => {
+  try {
+    // First, we find a user using their primary key (provided by params)
+    const userData = await User.findByPk(req.params.id);
+    // If userData evaluates as flase (no user exists with that primary key), then we will send an error message
+    if (!userData) {
+      res.status(404).json({ message: 'No user found with this id!' });
+      return;
+    }
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Update a user
+router.put('/:id', async (req, res) => {
+  try {
+    const userData = await User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!userData[0]) {
+      res.status(404).json({ message: 'No user found with this id!' });
+      return;
+    }
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Delete a user
+router.delete('/:id', async (req, res) => {
+  try {
+    const userData = await User.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!userData) {
+      res.status(404).json({ message: 'No user found with this id!' });
+      return;
+    }
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
