@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const { log } = require("handlebars");
-const Review = require("../models/Review");
+const { Review } = require("../models");
 
 // Get all reviews for homepage
 router.get('/', async (req, res) => {
@@ -10,34 +9,32 @@ router.get('/', async (req, res) => {
   });
   const reviews = reviewData.map((review) => 
     review.get({ plain: true }));
-  res.render('homepage', { 
-      reviews,
-      loggedIn: req.session.loggedIn,
-    });
+  // Send over the loggedIn session variable to the 'homepage' template
+  res.render('homepage', { reviews, loggedIn: req.session.loggedIn });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
 // Route to get one review
 router.get('/review/:id', async (req, res) => {
+  // If the user is not logged in, redirect the user to the login page
+  if (!req.session.loggedIn) {
+    res.redirect('/login');
+  } else {
+  // If the user is logged in, allow them to view the review
   try {
     // Search the database for a dish with an id that matches params
     const reviewData = await Review.findByPk(req.params.id);
-    if (!reviewData) {
-      res.status(404).json({ message: 'No review found with this id!' });
-      return;
-    }
-    // console.log(reviewData);
+    console.log(reviewData);
     // We use .get({ plain: true }) on the object to serialize it so that it only includes the data that we need. 
     const review = reviewData.get({ plain: true });
-    // TODO: Send over the 'LoggedIn' session variable to the 'homepage' template
-    
-    // Then, the 'dish' template is rendered and dish is passed into the template.
-    res.render('reviewpage', review);
-    } catch (err) {
-        res.status(500).json(err);
+    // Send over the 'LoggedIn' session variable to the 'homepage' template
+    // Then, the 'review' template is rendered and review is passed into the template.
+    res.render('reviewpage', { review, loggedIn: req.session.loggedIn });
+        } catch (err) {
+            res.status(500).json(err);
+        }
     }
   });
 

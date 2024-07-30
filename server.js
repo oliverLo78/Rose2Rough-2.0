@@ -1,5 +1,9 @@
 const path = require('path');
 const express = require('express');
+// Import express-session
+const session = require('express-session');
+const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const exphbs = require('express-handlebars');
 
 const routes = require('./controllers');
@@ -11,14 +15,14 @@ const mysql = require('mysql2');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const sequelize = require('./config/connection');
-const session = require('express-session');
-
 // Set up sessions
 const sess = {
   secret: 'Super secret secret',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  }),
 };
 
 app.use(session(sess));
