@@ -48,7 +48,7 @@ Concept: What is your user story? What was your motivation for development?
 
 Process: What were the technologies used? How were tasks and roles broken down and assigned? What challenges did you encounter? What were your successes?
 
-Demo: Show your stuff!
+Demo: https://fathomless-depths-90091-92b03ee676f9.herokuapp.com/
 
 Directions for Future Development
 
