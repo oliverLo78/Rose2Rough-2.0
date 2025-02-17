@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-// Import express-session
 const session = require('express-session');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -8,9 +7,6 @@ const exphbs = require('express-handlebars');
 
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
-
-// Import and require mysql2
-const mysql = require('mysql2');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -21,7 +17,7 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
+    db: sequelize,
   }),
 };
 
@@ -37,19 +33,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// Connect to database
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    // MySQL username,
-    user: 'root',
-    // MySQL password
-    password: 'rootroot',
-    database: 'review_db'
-  },
-  console.log(`Connected to the review_db database.`)
-);
+// Test the Sequelize connection
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connected to the review_db database using Sequelize.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 app.use(require('./controllers/'));
 app.use(routes);
